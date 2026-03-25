@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "rggVbmAHxAEH2GNrpCfm1vdZcdH8zCXx70ubyNmK5N8=",
+  "Source": "FoodGuideAPI",
+  "BasePath": "_content/FoodGuideAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

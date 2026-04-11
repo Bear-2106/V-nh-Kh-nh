@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DoAnVinhKhanh.PoiDetailPage"
+             Title=" ">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="12">
+            <Label x:Name="NameLabel" FontSize="28" FontAttributes="Bold" />
+            <Label x:Name="DescriptionLabel" FontSize="18" />
+            <Label x:Name="LatitudeLabel" FontSize="16" />
+            <Label x:Name="LongitudeLabel" FontSize="16" />
+            <Label x:Name="RadiusLabel" FontSize="16" />
+            <Button Text="Chỉ đường"
+                    Clicked="OnOpenMapClicked" />
+            <Image x:Name="PoiImage"
+                    HeightRequest="220"
+                    Aspect="AspectFill" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

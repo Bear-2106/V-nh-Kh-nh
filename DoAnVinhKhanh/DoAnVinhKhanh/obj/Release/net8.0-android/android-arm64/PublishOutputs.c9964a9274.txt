@@ -1,3 +1,0 @@
-C:\DoAnThu7\DoAnVinhKhanh\DoAnVinhKhanh\bin\Release\net8.0-android\android-arm64\publish\com.companyname.doanvinhkhanh-Signed.apk
-C:\DoAnThu7\DoAnVinhKhanh\DoAnVinhKhanh\bin\Release\net8.0-android\android-arm64\publish\com.companyname.doanvinhkhanh.apk
-C:\DoAnThu7\DoAnVinhKhanh\DoAnVinhKhanh\bin\Release\net8.0-android\android-arm64\publish\_Microsoft.Android.Resource.Designer.dll

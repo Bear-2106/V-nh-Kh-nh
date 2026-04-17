@@ -1,0 +1,61 @@
+@model PagedResult<FoodItemViewModel>
+@{
+    ViewData["Title"] = "Quản lý Món ăn";
+    var pois = ViewBag.Pois as List<PoiItemViewModel> ?? new();
+}
+
+<div class="content-card">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="mb-0">Danh sách món ăn</h4>
+        <a asp-action="Create" class="btn btn-success">+ Thêm món ăn</a>
+    </div>
+
+    <form method="get" class="filter-row">
+        <input name="search" value="@Context.Request.Query["search"]" class="form-control" placeholder="Tìm theo tên món..." />
+        <select name="poiId" class="form-select">
+            <option value="">Tất cả POI</option>
+            @foreach (var poi in pois)
+            {
+                <option value="@poi.Id" selected="@(Context.Request.Query["poiId"] == poi.Id.ToString())">@poi.Name</option>
+            }
+        </select>
+        <select name="pageSize" class="form-select">
+            @foreach (var size in new[] { 5, 10, 20 })
+            {
+                <option value="@size" selected="@(Model.PageSize == size)">@size / trang</option>
+            }
+        </select>
+        <button class="btn btn-primary">Lọc</button>
+    </form>
+
+    <table class="table table-bordered table-striped align-middle">
+        <thead class="table-dark">
+            <tr><th>ID</th><th>POI ID</th><th>Tên món</th><th>Giá</th><th>Ảnh</th><th>Trạng thái</th><th width="160">Thao tác</th></tr>
+        </thead>
+        <tbody>
+        @if (Model.Items.Any())
+        {
+            foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.PoiId</td>
+                    <td><strong>@item.Name</strong><div class="text-muted small">@item.Description</div></td>
+                    <td>@item.Price</td>
+                    <td>@if (!string.IsNullOrWhiteSpace(item.ImageUrl)) { <a href="@item.ImageUrl" target="_blank">Xem ảnh</a> } else { <span class="text-muted">Không có</span> }</td>
+                    <td><span class="badge @(item.IsAvailable ? "bg-success" : "bg-secondary")">@(item.IsAvailable ? "Còn bán" : "Ngưng bán")</span></td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Sửa</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm" onclick="return confirm('Bạn chắc chắn muốn xóa món ăn này?')">Xóa</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="7" class="text-center">Không có dữ liệu.</td></tr>
+        }
+        </tbody>
+    </table>
+    @await Html.PartialAsync("_Pager", Model)
+</div>

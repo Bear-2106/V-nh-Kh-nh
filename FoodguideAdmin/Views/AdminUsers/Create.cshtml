@@ -1,0 +1,19 @@
+@model AdminUserEditViewModel
+@{
+    ViewData["Title"] = "Thêm Admin User";
+    var roleOptions = ViewBag.RoleOptions as List<string> ?? new();
+}
+<div class="content-card">
+    <h4 class="mb-3">Thêm tài khoản admin</h4>
+    @if (ViewBag.Error != null) { <div class="alert alert-danger">@ViewBag.Error</div> }
+    <form method="post">
+        <div class="row g-3">
+            <div class="col-md-6"><label class="form-label">Username</label><input asp-for="Username" class="form-control" /><span asp-validation-for="Username" class="text-danger"></span></div>
+            <div class="col-md-6"><label class="form-label">Mật khẩu</label><input asp-for="Password" class="form-control" /><span asp-validation-for="Password" class="text-danger"></span></div>
+            <div class="col-md-6"><label class="form-label">Họ tên</label><input asp-for="FullName" class="form-control" /><span asp-validation-for="FullName" class="text-danger"></span></div>
+            <div class="col-md-6"><label class="form-label">Vai trò</label><select asp-for="Role" class="form-select"><option value="">Chọn vai trò</option>@foreach (var role in roleOptions){<option value="@role">@role</option>}</select><span asp-validation-for="Role" class="text-danger"></span></div>
+        </div>
+        <div class="mt-4"><button class="btn btn-primary">Lưu</button> <a asp-action="Index" class="btn btn-secondary">Quay lại</a></div>
+    </form>
+</div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

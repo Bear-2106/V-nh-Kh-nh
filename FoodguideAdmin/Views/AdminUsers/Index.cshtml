@@ -1,0 +1,36 @@
+@model PagedResult<AdminUserViewModel>
+@{
+    ViewData["Title"] = "Tài khoản Admin";
+    var roles = ViewBag.Roles as List<string> ?? new();
+}
+<div class="content-card">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="mb-0">Danh sách tài khoản admin</h4>
+        <a asp-action="Create" class="btn btn-success">+ Thêm tài khoản</a>
+    </div>
+    <form method="get" class="filter-row">
+        <input name="search" value="@Context.Request.Query["search"]" class="form-control" placeholder="Tìm theo username, họ tên..." />
+        <select name="role" class="form-select">
+            <option value="All">Tất cả vai trò</option>
+            @foreach (var role in roles)
+            {
+                <option value="@role" selected="@(Context.Request.Query["role"] == role)">@role</option>
+            }
+        </select>
+        <button class="btn btn-primary">Lọc</button>
+    </form>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark"><tr><th>ID</th><th>Username</th><th>Họ tên</th><th>Vai trò</th><th width="160">Thao tác</th></tr></thead>
+        <tbody>
+        @if (Model.Items.Any())
+        {
+            foreach (var item in Model.Items)
+            {
+                <tr><td>@item.Id</td><td>@item.Username</td><td>@item.FullName</td><td>@item.Role</td><td><a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Sửa</a> <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a></td></tr>
+            }
+        }
+        else { <tr><td colspan="5" class="text-center">Không có dữ liệu.</td></tr> }
+        </tbody>
+    </table>
+    @await Html.PartialAsync("_Pager", Model)
+</div>

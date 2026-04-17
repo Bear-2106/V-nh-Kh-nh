@@ -1,0 +1,28 @@
+@model PoiEditViewModel
+@{
+    ViewData["Title"] = "Sửa POI";
+}
+<div class="content-card">
+    <h4 class="mb-3">Chỉnh sửa POI</h4>
+    @if (ViewBag.Error != null) { <div class="alert alert-danger">@ViewBag.Error</div> }
+    <form method="post">
+        <div class="row g-3">
+            <div class="col-md-6"><label class="form-label">Tên POI</label><input asp-for="Name" class="form-control" /><span asp-validation-for="Name" class="text-danger"></span></div>
+            <div class="col-md-6"><label class="form-label">Category</label><input asp-for="Category" class="form-control" /></div>
+            <div class="col-12"><label class="form-label">Mô tả</label><textarea asp-for="Description" class="form-control" rows="3"></textarea></div>
+            <div class="col-md-6"><label class="form-label">Địa chỉ</label><input asp-for="Address" class="form-control" /></div>
+            <div class="col-md-3"><label class="form-label">Latitude</label><input asp-for="Latitude" class="form-control" /></div>
+            <div class="col-md-3"><label class="form-label">Longitude</label><input asp-for="Longitude" class="form-control" /></div>
+            <div class="col-md-4"><label class="form-label">Bán kính</label><input asp-for="Radius" class="form-control" /></div>
+            <div class="col-md-4"><label class="form-label">Image URL</label><input asp-for="ImageUrl" class="form-control" /></div>
+            <div class="col-md-4"><label class="form-label">Audio URL</label><input asp-for="AudioUrl" class="form-control" /></div>
+            <div class="col-12"><div class="form-check"><input asp-for="IsActive" class="form-check-input" /><label asp-for="IsActive" class="form-check-label">Đang hoạt động</label></div></div>
+        </div>
+        <div class="mt-4">
+            <button class="btn btn-primary">Cập nhật</button>
+            <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

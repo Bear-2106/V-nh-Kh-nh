@@ -1,0 +1,18 @@
+@model RoleEditViewModel
+@{
+    ViewData["Title"] = "Thêm Vai trò";
+}
+<div class="content-card">
+    <h4 class="mb-3">Thêm vai trò</h4>
+    @if (ViewBag.Error != null) { <div class="alert alert-danger">@ViewBag.Error</div> }
+    <form method="post">
+        <div class="row g-3">
+            <div class="col-md-6"><label class="form-label">Tên vai trò</label><input asp-for="Name" class="form-control" /><span asp-validation-for="Name" class="text-danger"></span></div>
+            <div class="col-md-3"><label class="form-label">Priority</label><input asp-for="Priority" class="form-control" /></div>
+            <div class="col-md-3"><div class="form-check mt-4"><input asp-for="IsSystem" class="form-check-input" /><label asp-for="IsSystem" class="form-check-label">Is System</label></div></div>
+            <div class="col-12"><label class="form-label">Permissions</label><textarea asp-for="Permissions" class="form-control" rows="4" placeholder="Ví dụ: poi:create, poi:update, audit:view"></textarea></div>
+        </div>
+        <div class="mt-4"><button class="btn btn-primary">Lưu</button> <a asp-action="Index" class="btn btn-secondary">Quay lại</a></div>
+    </form>
+</div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

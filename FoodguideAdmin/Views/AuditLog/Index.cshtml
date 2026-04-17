@@ -1,0 +1,42 @@
+@model PagedResult<AuditLogItemViewModel>
+@{
+    ViewData["Title"] = "Audit Logs";
+    var actionOptions = ViewBag.ActionOptions as List<string> ?? new();
+    var resourceOptions = ViewBag.ResourceOptions as List<string> ?? new();
+}
+
+<div class="content-card">
+    <h4 class="mb-3">Nhật ký hệ thống</h4>
+    <form method="get" class="filter-row">
+        <input name="search" value="@Context.Request.Query["search"]" class="form-control" placeholder="Tìm theo action, resource, mô tả..." />
+        <select name="actionFilter" class="form-select">
+            <option value="All">Tất cả action</option>
+            @foreach (var action in actionOptions)
+            {
+                <option value="@action" selected="@(Context.Request.Query["actionFilter"] == action)">@action</option>
+            }
+        </select>
+        <select name="resourceFilter" class="form-select">
+            <option value="All">Tất cả resource</option>
+            @foreach (var resource in resourceOptions)
+            {
+                <option value="@resource" selected="@(Context.Request.Query["resourceFilter"] == resource)">@resource</option>
+            }
+        </select>
+        <button class="btn btn-primary">Lọc</button>
+    </form>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark"><tr><th>ID</th><th>UserId</th><th>Action</th><th>Resource</th><th>Mô tả</th><th>Thời gian</th></tr></thead>
+        <tbody>
+        @if (Model.Items.Any())
+        {
+            foreach (var item in Model.Items)
+            {
+                <tr><td>@item.Id</td><td>@item.UserId</td><td>@item.Action</td><td>@item.Resource</td><td>@item.Description</td><td>@item.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td></tr>
+            }
+        }
+        else { <tr><td colspan="6" class="text-center">Không có dữ liệu.</td></tr> }
+        </tbody>
+    </table>
+    @await Html.PartialAsync("_Pager", Model)
+</div>

@@ -1,0 +1,98 @@
+@model DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="row">
+    <div class="col-md-3"><div class="stat-card stat-blue"><div>Tổng POIs</div><h3>@Model.TotalPois</h3></div></div>
+    <div class="col-md-3"><div class="stat-card stat-green"><div>Tổng món ăn</div><h3>@Model.TotalFoods</h3></div></div>
+    <div class="col-md-3"><div class="stat-card stat-orange"><div>Pending Registrations</div><h3>@Model.PendingRegistrations</h3></div></div>
+    <div class="col-md-3"><div class="stat-card stat-red"><div>Pending Submissions</div><h3>@Model.PendingSubmissions</h3></div></div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="content-card">
+            <form method="get" class="filter-row">
+                <select name="category" class="form-select">
+                    <option value="All">Tất cả category</option>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category" selected="@(Model.SelectedCategory == category)">@category</option>
+                    }
+                </select>
+                <button class="btn btn-primary">Lọc thống kê</button>
+            </form>
+
+            <h5 class="mb-3">Biểu đồ danh mục POI</h5>
+            @if (Model.CategorySummaries.Any())
+            {
+                foreach (var item in Model.CategorySummaries)
+                {
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <strong>@item.Category</strong>
+                            <span>@item.PoiCount POI (@item.Percentage.ToString("0.0")%)</span>
+                        </div>
+                        <div class="meter"><span style="width:@item.Percentage.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture)%"></span></div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="text-muted">Chưa có dữ liệu danh mục.</div>
+            }
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="content-card">
+            <h5 class="mb-3">Tổng quan hệ thống</h5>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between"><span>Admin Users</span><strong>@Model.TotalAdminUsers</strong></li>
+                <li class="list-group-item d-flex justify-content-between"><span>Roles</span><strong>@Model.TotalRoles</strong></li>
+                <li class="list-group-item d-flex justify-content-between"><span>Localizations</span><strong>@Model.TotalLocalizations</strong></li>
+                <li class="list-group-item d-flex justify-content-between"><span>AI Usage Limits</span><strong>@Model.TotalAiUsageLimits</strong></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="content-card">
+            <h5 class="mb-3">POI có nhiều món ăn</h5>
+            <table class="table table-striped">
+                <thead><tr><th>POI</th><th>Số món</th></tr></thead>
+                <tbody>
+                @foreach (var item in Model.PoiFoodSummaries)
+                {
+                    <tr>
+                        <td><a asp-controller="Poi" asp-action="Details" asp-route-id="@item.PoiId">@item.PoiName</a></td>
+                        <td>@item.FoodCount</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="content-card">
+            <h5 class="mb-3">Audit Logs gần nhất</h5>
+            <table class="table table-striped">
+                <thead><tr><th>Action</th><th>Resource</th><th>Thời gian</th></tr></thead>
+                <tbody>
+                @foreach (var item in Model.RecentAuditLogs)
+                {
+                    <tr>
+                        <td>@item.Action</td>
+                        <td>@item.Resource</td>
+                        <td>@item.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+@model AiUsageLimitEditViewModel
+@{
+    ViewData["Title"] = "Thêm AI Usage";
+}
+<div class="content-card">
+    <h4 class="mb-3">Thêm dữ liệu AI usage</h4>
+    @if (ViewBag.Error != null) { <div class="alert alert-danger">@ViewBag.Error</div> }
+    <form method="post">
+        <div class="row g-3">
+            <div class="col-md-4"><label class="form-label">UserId</label><input asp-for="UserId" class="form-control" /><span asp-validation-for="UserId" class="text-danger"></span></div>
+            <div class="col-md-4"><label class="form-label">Ngày sử dụng</label><input asp-for="UsageDate" type="date" class="form-control" /><span asp-validation-for="UsageDate" class="text-danger"></span></div>
+            <div class="col-md-4"><label class="form-label">Count</label><input asp-for="Count" class="form-control" /><span asp-validation-for="Count" class="text-danger"></span></div>
+        </div>
+        <div class="mt-4"><button class="btn btn-primary">Lưu</button> <a asp-action="Index" class="btn btn-secondary">Quay lại</a></div>
+    </form>
+</div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

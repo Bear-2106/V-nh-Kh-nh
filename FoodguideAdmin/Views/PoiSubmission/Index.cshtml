@@ -1,0 +1,38 @@
+@model PagedResult<PoiSubmissionViewModel>
+@{
+    ViewData["Title"] = "Duyệt Bài đăng";
+}
+
+<div class="content-card">
+    <h4 class="mb-3">Danh sách bài đăng POI</h4>
+    <form method="get" class="filter-row">
+        <input name="search" value="@Context.Request.Query["search"]" class="form-control" placeholder="Tìm theo tên bài đăng, địa chỉ..." />
+        <select name="status" class="form-select">
+            @foreach (var status in new[] { "All", "Pending", "Approved", "Rejected" })
+            {
+                <option value="@status" selected="@(Context.Request.Query["status"] == status)">@status</option>
+            }
+        </select>
+        <button class="btn btn-primary">Lọc</button>
+    </form>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark"><tr><th>ID</th><th>Tên bài đăng</th><th>Địa chỉ</th><th>Category</th><th>Trạng thái</th><th>Ngày gửi</th><th width="160">Thao tác</th></tr></thead>
+        <tbody>
+        @if (Model.Items.Any())
+        {
+            foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.Id</td><td><strong>@item.PoiName</strong><div class="text-muted small">@item.Description</div></td><td>@item.Address</td><td>@item.Category</td><td>@item.Status</td><td>@item.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>
+                        <a asp-action="Approve" asp-route-id="@item.Id" class="btn btn-success btn-sm">Approve</a>
+                        <a asp-action="Reject" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Reject</a>
+                    </td>
+                </tr>
+            }
+        }
+        else { <tr><td colspan="7" class="text-center">Không có dữ liệu.</td></tr> }
+        </tbody>
+    </table>
+    @await Html.PartialAsync("_Pager", Model)
+</div>

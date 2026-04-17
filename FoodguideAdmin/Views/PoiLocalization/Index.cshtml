@@ -1,0 +1,44 @@
+@model PagedResult<PoiLocalizationViewModel>
+@{
+    ViewData["Title"] = "Đa ngôn ngữ";
+    var pois = ViewBag.Pois as List<PoiItemViewModel> ?? new();
+    var languages = ViewBag.Languages as List<string> ?? new();
+}
+<div class="content-card">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="mb-0">Quản lý bản dịch POI</h4>
+        <a asp-action="Create" class="btn btn-success">+ Thêm bản dịch</a>
+    </div>
+    <form method="get" class="filter-row">
+        <input name="search" value="@Context.Request.Query["search"]" class="form-control" placeholder="Tìm theo tên dịch..." />
+        <select name="poiId" class="form-select">
+            <option value="">Tất cả POI</option>
+            @foreach (var poi in pois)
+            {
+                <option value="@poi.Id" selected="@(Context.Request.Query["poiId"] == poi.Id.ToString())">@poi.Name</option>
+            }
+        </select>
+        <select name="language" class="form-select">
+            <option value="All">Tất cả ngôn ngữ</option>
+            @foreach (var language in languages)
+            {
+                <option value="@language" selected="@(Context.Request.Query["language"] == language)">@language</option>
+            }
+        </select>
+        <button class="btn btn-primary">Lọc</button>
+    </form>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark"><tr><th>ID</th><th>POI ID</th><th>Lang</th><th>Tên dịch</th><th>Mô tả</th><th width="160">Thao tác</th></tr></thead>
+        <tbody>
+        @if (Model.Items.Any())
+        {
+            foreach (var item in Model.Items)
+            {
+                <tr><td>@item.Id</td><td>@item.PoiId</td><td>@item.Language</td><td>@item.LocalizedName</td><td>@item.LocalizedDescription</td><td><a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Sửa</a> <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a></td></tr>
+            }
+        }
+        else { <tr><td colspan="6" class="text-center">Không có dữ liệu.</td></tr> }
+        </tbody>
+    </table>
+    @await Html.PartialAsync("_Pager", Model)
+</div>

@@ -1,0 +1,32 @@
+@model PagedResult<AiUsageLimitViewModel>
+@{
+    ViewData["Title"] = "AI Usage Limits";
+}
+<div class="content-card">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="mb-0">Giới hạn sử dụng AI</h4>
+        <a asp-action="Create" class="btn btn-success">+ Thêm dữ liệu</a>
+    </div>
+    <form method="get" class="filter-row">
+        <input name="search" value="@Context.Request.Query["search"]" class="form-control" placeholder="Tìm theo UserId hoặc ngày..." />
+        <button class="btn btn-primary">Lọc</button>
+    </form>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark"><tr><th>ID</th><th>UserId</th><th>Ngày</th><th>Count</th><th>Progress</th><th width="160">Thao tác</th></tr></thead>
+        <tbody>
+        @if (Model.Items.Any())
+        {
+            foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.Id</td><td>@item.UserId</td><td>@item.UsageDate.ToString("dd/MM/yyyy")</td><td>@item.Count</td>
+                    <td><div class="meter"><span style="width:@item.ProgressPercent%"></span></div><small>@item.ProgressPercent%</small></td>
+                    <td><a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Sửa</a> <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a></td>
+                </tr>
+            }
+        }
+        else { <tr><td colspan="6" class="text-center">Không có dữ liệu.</td></tr> }
+        </tbody>
+    </table>
+    @await Html.PartialAsync("_Pager", Model)
+</div>

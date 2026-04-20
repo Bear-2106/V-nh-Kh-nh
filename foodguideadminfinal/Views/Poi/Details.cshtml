@@ -1,0 +1,39 @@
+@model PoiDetailsViewModel
+@{
+    ViewData["Title"] = "Chi tiết quán";
+}
+
+<div class="content-card">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="mb-0">@Model.Poi.Name</h4>
+        <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+    </div>
+    <div class="row g-3">
+        <div class="col-md-6"><strong>Danh mục:</strong> @(string.IsNullOrWhiteSpace(Model.Poi.Category) ? "Chưa phân loại" : Model.Poi.Category)</div>
+        <div class="col-md-6"><strong>Địa chỉ:</strong> @Model.Poi.Address</div>
+        <div class="col-md-6"><strong>Tọa độ:</strong> @Model.Poi.Latitude, @Model.Poi.Longitude</div>
+        <div class="col-md-6"><strong>Bán kính:</strong> @Model.Poi.Radius</div>
+        <div class="col-md-6"><strong>Số người đang truy cập quán này:</strong> @Model.CurrentVisitors</div>
+        <div class="col-12"><strong>Mô tả:</strong> @Model.Poi.Description</div>
+    </div>
+</div>
+
+<div class="content-card">
+    <h5>Danh sách món ăn của quán</h5>
+    <table class="table table-striped">
+        <thead><tr><th>ID</th><th>Tên món</th><th>Giá</th><th>Trạng thái</th></tr></thead>
+        <tbody>
+        @if (Model.Foods.Any())
+        {
+            foreach (var item in Model.Foods)
+            {
+                <tr><td>@item.Id</td><td>@item.Name</td><td>@item.Price</td><td>@(item.IsAvailable ? "Còn bán" : "Ngưng bán")</td></tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="4" class="text-center">Quán này chưa có món ăn.</td></tr>
+        }
+        </tbody>
+    </table>
+</div>

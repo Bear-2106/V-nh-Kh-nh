@@ -1,0 +1,37 @@
+@model FoodEditViewModel
+@{
+    ViewData["Title"] = "Thêm Món ăn";
+    var pois = ViewBag.Pois as List<PoiItemViewModel> ?? new();
+}
+
+<div class="content-card">
+    <h4 class="mb-3">Thêm món ăn mới</h4>
+    @if (ViewBag.Error != null) { <div class="alert alert-danger">@ViewBag.Error</div> }
+    <form method="post" novalidate>
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Quán ăn</label>
+                <select asp-for="PoiId" class="form-select">
+                    <option value="">Chọn quán</option>
+                    @foreach (var poi in pois)
+                    {
+                        <option value="@poi.Id">@poi.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="PoiId" class="text-danger"></span>
+            </div>
+            <div class="col-md-6"><label class="form-label">Tên món</label><input asp-for="Name" class="form-control" /><span asp-validation-for="Name" class="text-danger"></span></div>
+            <div class="col-12"><label class="form-label">Mô tả</label><textarea asp-for="Description" class="form-control"></textarea></div>
+            <div class="col-md-4"><label class="form-label">Giá</label><input asp-for="Price" type="text" class="form-control" placeholder="Để trống = 0" /><span asp-validation-for="Price" class="text-danger"></span></div>
+            <div class="col-md-8"><label class="form-label">Image URL</label><input asp-for="ImageUrl" class="form-control" /></div>
+            <div class="col-12"><div class="form-check"><input asp-for="IsAvailable" class="form-check-input" /><label asp-for="IsAvailable" class="form-check-label">Đang bán</label></div></div>
+        </div>
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Lưu</button>
+            <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

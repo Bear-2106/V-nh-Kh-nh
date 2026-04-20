@@ -1,0 +1,61 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\DoAnThu7\\DoAnVinhKhanh\\DAVK.API\\VinhKhanhmain\\wwwroot\\audio\\BanhMi.mp3",
+      "PackagePath": "staticwebassets\\audio\\BanhMi.mp3"
+    },
+    {
+      "Id": "C:\\DoAnThu7\\DoAnVinhKhanh\\DAVK.API\\VinhKhanhmain\\wwwroot\\audio\\BunDau.mp3",
+      "PackagePath": "staticwebassets\\audio\\BunDau.mp3"
+    },
+    {
+      "Id": "C:\\DoAnThu7\\DoAnVinhKhanh\\DAVK.API\\VinhKhanhmain\\wwwroot\\audio\\Bunbo.mp3",
+      "PackagePath": "staticwebassets\\audio\\Bunbo.mp3"
+    },
+    {
+      "Id": "C:\\DoAnThu7\\DoAnVinhKhanh\\DAVK.API\\VinhKhanhmain\\wwwroot\\audio\\ComSuon.mp3",
+      "PackagePath": "staticwebassets\\audio\\ComSuon.mp3"
+    },
+    {
+      "Id": "C:\\DoAnThu7\\DoAnVinhKhanh\\DAVK.API\\VinhKhanhmain\\wwwroot\\audio\\Pho.mp3",
+      "PackagePath": "staticwebassets\\audio\\Pho.mp3"
+    },
+    {
+      "Id": "C:\\DoAnThu7\\DoAnVinhKhanh\\DAVK.API\\VinhKhanhmain\\wwwroot\\images\\banh-mi.jpg",
+      "PackagePath": "staticwebassets\\images\\banh-mi.jpg"
+    },
+    {
+      "Id": "C:\\DoAnThu7\\DoAnVinhKhanh\\DAVK.API\\VinhKhanhmain\\wwwroot\\images\\bun-bo.jpg",
+      "PackagePath": "staticwebassets\\images\\bun-bo.jpg"
+    },
+    {
+      "Id": "C:\\DoAnThu7\\DoAnVinhKhanh\\DAVK.API\\VinhKhanhmain\\wwwroot\\images\\bun-dau.jpg",
+      "PackagePath": "staticwebassets\\images\\bun-dau.jpg"
+    },
+    {
+      "Id": "C:\\DoAnThu7\\DoAnVinhKhanh\\DAVK.API\\VinhKhanhmain\\wwwroot\\images\\com-suon.jpg",
+      "PackagePath": "staticwebassets\\images\\com-suon.jpg"
+    },
+    {
+      "Id": "C:\\DoAnThu7\\DoAnVinhKhanh\\DAVK.API\\VinhKhanhmain\\wwwroot\\images\\pho-tai-nan.jpg",
+      "PackagePath": "staticwebassets\\images\\pho-tai-nan.jpg"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.FoodGuideAPI.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.build.FoodGuideAPI.props",
+      "PackagePath": "build\\FoodGuideAPI.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.FoodGuideAPI.props",
+      "PackagePath": "buildMultiTargeting\\FoodGuideAPI.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildTransitive.FoodGuideAPI.props",
+      "PackagePath": "buildTransitive\\FoodGuideAPI.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

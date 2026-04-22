@@ -1,0 +1,49 @@
+/* _content/FoodGuideAdmin/Views/Shared/_Layout.cshtml.rz.scp.css */
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-wuq1cxjjxm] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-wuq1cxjjxm] {
+  color: #0077cc;
+}
+
+.btn-primary[b-wuq1cxjjxm] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-wuq1cxjjxm], .nav-pills .show > .nav-link[b-wuq1cxjjxm] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-wuq1cxjjxm] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-wuq1cxjjxm] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-wuq1cxjjxm] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-wuq1cxjjxm] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-wuq1cxjjxm] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}

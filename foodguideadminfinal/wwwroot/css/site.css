@@ -1,0 +1,230 @@
+html {
+    font-size: 15px;
+}
+
+body {
+    margin: 0;
+    background: #f4f7fb;
+    color: #1f2937;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.admin-shell {
+    min-height: 100vh;
+    display: flex;
+}
+
+.sidebar {
+    width: 260px;
+    background: linear-gradient(180deg, #152238 0%, #1f3b73 100%);
+    color: white;
+    padding: 24px 16px;
+}
+
+.brand-block {
+    padding: 10px 12px 22px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    margin-bottom: 22px;
+}
+
+.brand-title {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.65rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+}
+
+.brand-title::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #f59e0b, #f97316);
+    box-shadow: 0 0 0 6px rgba(249, 115, 22, 0.14);
+}
+
+.sidebar-nav a {
+    display: block;
+    color: rgba(255, 255, 255, 0.88);
+    text-decoration: none;
+    padding: 10px 12px;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    transition: 0.2s ease;
+}
+
+.sidebar-nav a:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: white;
+}
+
+.sidebar-nav a.active {
+    background: rgba(255, 255, 255, 0.22);
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: inset 4px 0 0 #ffffff, inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.main-panel {
+    flex: 1;
+    padding: 24px;
+}
+
+.topbar {
+    background: white;
+    border-radius: 18px;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+.topbar h1 {
+    font-size: 1.6rem;
+    margin: 0;
+}
+
+.topbar p {
+    margin: 4px 0 0;
+    color: #6b7280;
+}
+
+.user-chip {
+    background: #eef4ff;
+    color: #1d4ed8;
+    border-radius: 16px;
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+.page-body {
+    margin-top: 20px;
+}
+
+.content-card {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    color: white;
+    border-radius: 18px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+}
+
+.stat-card h3 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.stat-blue { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+.stat-green { background: linear-gradient(135deg, #16a34a, #15803d); }
+.stat-orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.stat-red { background: linear-gradient(135deg, #ef4444, #dc2626); }
+
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.filter-row .form-control,
+.filter-row .form-select {
+    min-width: 180px;
+}
+
+.table thead th {
+    white-space: nowrap;
+}
+
+.badge-soft {
+    background: #e0ecff;
+    color: #1d4ed8;
+    padding: 6px 10px;
+    border-radius: 999px;
+}
+
+.meter {
+    height: 10px;
+    background: #e5e7eb;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.meter > span {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, #0ea5e9, #2563eb);
+}
+
+.login-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 48%, #f8fafc 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    border-radius: 22px;
+    padding: 28px;
+    box-shadow: 0 18px 40px rgba(30, 41, 59, 0.12);
+}
+
+.pagination .page-link {
+    border-radius: 10px;
+    margin-left: 6px;
+}
+
+.poi-image-trigger {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: zoom-in;
+}
+
+.poi-image-trigger img {
+    display: block;
+}
+
+#poiImagePreview {
+    width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    background: #f8fafc;
+}
+
+@media (max-width: 992px) {
+    .admin-shell {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .topbar {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+    }
+}

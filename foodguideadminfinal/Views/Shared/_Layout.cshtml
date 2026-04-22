@@ -1,0 +1,76 @@
+@using FoodGuideAdmin.Models
+@{
+    var currentUser = Context.Session.GetString("currentUser");
+    var user = string.IsNullOrWhiteSpace(currentUser)
+        ? null
+        : System.Text.Json.JsonSerializer.Deserialize<AdminSessionUser>(currentUser);
+    var currentPath = Context.Request.Path.Value ?? string.Empty;
+
+    string NavClass(string pathPrefix)
+    {
+        var isActive = string.Equals(pathPrefix, "/", StringComparison.OrdinalIgnoreCase)
+            ? string.Equals(currentPath, "/", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(currentPath, "/Home", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(currentPath, "/Home/Index", StringComparison.OrdinalIgnoreCase)
+            : currentPath.StartsWith(pathPrefix, StringComparison.OrdinalIgnoreCase);
+
+        return isActive ? "active" : string.Empty;
+    }
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Food Guide Admin</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="admin-shell">
+        <aside class="sidebar">
+            <div class="brand-block">
+                <div class="brand-title">Food Guide</div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a asp-controller="Home" asp-action="Index" class="@NavClass("/")">Dashboard</a>
+                <a asp-controller="Poi" asp-action="Index" class="@NavClass("/Poi")">Quản lý quán ăn</a>
+                <a asp-controller="OwnerRegistration" asp-action="Index" class="@NavClass("/OwnerRegistration")">Duyệt chủ quán</a>
+                <a asp-controller="AdminUsers" asp-action="Index" class="@NavClass("/AdminUsers")">Tài khoản Admin</a>
+                <a asp-controller="AuditLog" asp-action="Index" class="@NavClass("/AuditLog")">Audit Logs</a>
+                <a asp-controller="Profile" asp-action="Index" class="@NavClass("/Profile")">Hồ sơ cá nhân</a>
+                <a asp-controller="ChangePassword" asp-action="Index" class="@NavClass("/ChangePassword")">Đổi mật khẩu</a>
+                <a asp-controller="Auth" asp-action="Logout" class="@NavClass("/Auth/Logout")">Đăng xuất</a>
+            </nav>
+        </aside>
+
+        <main class="main-panel">
+            <div class="topbar">
+                <div>
+                    <h1>@ViewData["Title"]</h1>
+                    <p>Hệ thống quản trị đồ án Food Guide</p>
+                </div>
+                <div class="user-chip">
+                    <strong>@(user?.FullName ?? "Admin")</strong>
+                    <span>@(user?.Role ?? "Admin")</span>
+                </div>
+            </div>
+
+            @if (TempData["AlertMessage"] != null)
+            {
+                <div class="alert alert-@TempData["AlertType"] mt-3">
+                    @TempData["AlertMessage"]
+                </div>
+            }
+
+            <div class="page-body">
+                @RenderBody()
+            </div>
+        </main>
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
